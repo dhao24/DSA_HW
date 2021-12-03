@@ -13,6 +13,7 @@ namespace Restaurant
 
         public void printDailyMenu(DateTime date)
         {
+            Console.WriteLine("Menu for {0}:",date.DayOfWeek.ToString());
             foreach (var item in menuItems)
             {
                 if (item.CheckAvailableDay(date.DayOfWeek))
@@ -46,7 +47,8 @@ namespace Restaurant
 
         public void Print_Item_info()
         {
-            Console.WriteLine("Name: {0}, Price: {1}, description: {2}", _name, _description, _price);
+            Console.WriteLine();
+            Console.WriteLine("Name: {0}\nPrice: {1}\ndescription: {2}", _name, _price, _description);
         }
 
         public bool CheckAvailableDay(DayOfWeek day)

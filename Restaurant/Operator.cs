@@ -14,10 +14,16 @@ namespace Restaurant
         {
             this._name = name;
             loadSettings();
+            Console.WriteLine("Welcome {0}", this._name);
         }
 
         public void CheckAvailableTables(DateTime dateTime)
         {
+            if (!validateTime(dateTime))
+            {
+                return;
+            }
+
             Console.Write("Available tables are:");
 
             StringBuilder sb = new StringBuilder();
@@ -30,12 +36,20 @@ namespace Restaurant
             }
             if (sb.Length==0)
             {
-                sb.Append(" Sorry, no available tables\n");
+                sb.Append(" Sorry, no available tables");
             }
+            sb.Append("\n");
+            Console.Write(sb.ToString());
         }
 
         public bool AssembleReservation(string guest_name, int guest_count, DateTime arrival_time)
         {
+            if (!validateTime(arrival_time))
+            {
+                Console.WriteLine("Reservation Failed");
+                return false;
+            }
+
             foreach (var table in tables)
             {
                 if (table.AddReservation(guest_name,guest_count,arrival_time))
@@ -51,6 +65,22 @@ namespace Restaurant
         public void ShowDailyMenu(DateTime date)
         {
             menu.printDailyMenu(date);
+        }
+
+        bool validateTime(DateTime dateTime)
+        {
+            if (dateTime.CompareTo(DateTime.Now) < 0)
+            {
+                Console.WriteLine("Time should be later than now!");
+                return false;
+            }
+
+            if (dateTime.Hour<11 || dateTime.Hour>22)
+            {
+                Console.WriteLine("Invalid time! lease check our opening hours carefully!");
+                return false;
+            }
+            return true;
         }
 
         void loadSettings()

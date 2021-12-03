@@ -11,7 +11,7 @@ namespace Restaurant
             get {
                 return _id;
             }
-        };
+        }
         List<Reservation> _reservations = new List<Reservation>();
 
         public Table(int n)
@@ -21,26 +21,19 @@ namespace Restaurant
 
         public bool IsAvailable(DateTime dateTime)
         {
-            if (dateTime.Hour>=11 && dateTime.Hour<=10)
+            if (_reservations.Count == 0)
             {
-                if (_reservations.Count == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    foreach (var booking in _reservations)
-                    {
-                        if (!booking.IsOverlapping(dateTime))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
+                return true;
             }
             else
             {
+                foreach (var booking in _reservations)
+                {
+                    if (!booking.IsOverlapping(dateTime))
+                    {
+                        return true;
+                    }
+                }
                 return false;
             }
         }
