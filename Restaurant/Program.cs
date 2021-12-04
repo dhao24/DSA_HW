@@ -26,11 +26,11 @@ namespace Restaurant
                 Console.WriteLine("Press the Escape (Esc) key to quit:");
                 Console.WriteLine("Current time is: {0}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 Console.WriteLine("---------------------------------------------------------------\n");
-                input = Console.ReadKey();
-                Console.Write(" --- You pressed ");
+                input = Console.ReadKey(true);
+                //Console.Write(" --- You pressed ");
                 if (input.Key == ConsoleKey.D1)
                 {
-                    Console.Write("1\n");
+                    Console.Write("---> 1\n");
                     Console.WriteLine("Please input the date and time in format (YYYY-MM-DD HH:MM:SS)");
                     string date = Console.ReadLine();
                     if (DateTime.TryParse(date, out datetime))
@@ -46,7 +46,7 @@ namespace Restaurant
 
                 if (input.Key == ConsoleKey.D2)
                 {
-                    Console.Write("2\n");
+                    Console.Write("---> 2\n");
                     Console.WriteLine("Please input the arrival time in format (YYYY-MM-DD HH:MM:SS)");
                     string date = Console.ReadLine();
                     if (DateTime.TryParse(date, out datetime))
@@ -68,7 +68,7 @@ namespace Restaurant
 
                 if (input.Key == ConsoleKey.D3)
                 {
-                    Console.Write("3\n");
+                    Console.Write("---> 3\n");
                     Console.WriteLine("Please input the date the format (YYYY-MM-DD)");
                     string date = Console.ReadLine();
                     
@@ -83,10 +83,6 @@ namespace Restaurant
 
 
                 }
-
-                //if ((input.Modifiers & ConsoleModifiers.Shift) != 0) Console.Write("SHIFT+");
-                //if ((input.Modifiers & ConsoleModifiers.Control) != 0) Console.Write("CTL+");
-                //Console.WriteLine(input.Key.ToString());
             } while (input .Key != ConsoleKey.Escape);
 
             Console.WriteLine("See you!");
