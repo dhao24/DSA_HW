@@ -17,16 +17,26 @@ namespace Restaurant
             Console.WriteLine("Welcome {0}", this._name);
         }
 
+        /*
+        check available tables
+        Parameters: DateTime
+        Return: Void
+        Procedures:
+        1) Valid time
+        2) Search for the availabilites of every table
+        3) Print results
+        */
         public void CheckAvailableTables(DateTime dateTime)
         {
+            // Check if the input time is 
             if (!validateTime(dateTime))
             {
                 return;
             }
 
             Console.Write("Available tables are:");
-
             StringBuilder sb = new StringBuilder();
+            // Search for every table
             foreach (var table in tables)
             {
                 if (table.IsAvailable(dateTime))
@@ -42,6 +52,16 @@ namespace Restaurant
             Console.Write(sb.ToString());
         }
 
+
+        /*
+        make the reservation
+        Parameters: string guest_name, int guest_count, DateTime arrival_time
+        Return: bool
+        Procedures:
+        1) Valid time
+        2) Add the reservation to the first availble table
+        3) Print results
+        */
         public bool AssembleReservation(string guest_name, int guest_count, DateTime arrival_time)
         {
             if (!validateTime(arrival_time))
@@ -67,6 +87,17 @@ namespace Restaurant
             menu.printDailyMenu(date);
         }
 
+        /*
+        Class Operator
+        Validate time
+        Check if the time is after current time and 
+        if the time is between the opening hours if the restaurant
+        Parameters: DateTime
+        Return: Bool
+        Procedures:
+        1) compare to current time
+        2) compare to opening hours
+        */
         bool validateTime(DateTime dateTime)
         {
             if (dateTime.CompareTo(DateTime.Now) < 0)
@@ -83,6 +114,15 @@ namespace Restaurant
             return true;
         }
 
+        /*
+        Class Operator
+        Load default settings
+        Parameters: 
+        Return:
+        Procedures:
+        1) add 5 tables
+        2) add menu items
+        */
         void loadSettings()
         {
             // create 5 tables
@@ -91,6 +131,7 @@ namespace Restaurant
                 tables.Add(new Table(i));
             }
 
+            // create random menu items
             menu.AddMenuItem("Peach and strawberry biscuits", "Crunchy biscuits made with fresh peach and strawberries", 300, DayOfWeek.Monday);
             menu.AddMenuItem("Currant and courgette cake", "Moist cake made with fresh currant and courgette", 300, DayOfWeek.Tuesday);
             menu.AddMenuItem("Squash and monkfish curry", "Mild curry made with pattypan squash and monkfish", 300, DayOfWeek.Wednesday);

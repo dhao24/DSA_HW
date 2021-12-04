@@ -27,6 +27,7 @@ namespace Restaurant
             }
             else
             {
+                // go through all the reservation, check if the time is overlapping
                 foreach (var booking in _reservations)
                 {
                     if (!booking.IsOverlapping(dateTime))
@@ -38,6 +39,15 @@ namespace Restaurant
             }
         }
 
+        /*
+        Class Table
+        Add reservation to the table
+        Parameters: string guest_name, int guest_count, DateTime arrival_time
+        Return: bool (true if success, false otherwise)
+        Procedures:
+        1) check if it is available with the given time
+        2) make the reservation
+        */
         public bool AddReservation(string guest_name, int guest_count, DateTime arrival_time)
         {
 
@@ -51,7 +61,6 @@ namespace Restaurant
                 return false;
             }
         }
-
     }
 
     public class Reservation
@@ -68,6 +77,7 @@ namespace Restaurant
             this._guestName = guest_name;
             this._guestCount = guest_count;
             this._arrivalTime = arrival_time;
+            // suppose each meal will last 2 hours
             this._endTime = this._arrivalTime.AddHours(2);
         }
 

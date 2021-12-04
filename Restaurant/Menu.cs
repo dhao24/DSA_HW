@@ -7,10 +7,15 @@ namespace Restaurant
     {
         List<MenuItem> menuItems=new List<MenuItem>();
 
-        public Menu()
-        {
-        }
-
+        /*
+        Class Menu
+        Print all the menu item according the day of the week
+        Parameters: DateTime
+        Return: void
+        Procedures:
+        1) loop every item
+        2) print the menu information if they are available on that day of the week
+        */
         public void printDailyMenu(DateTime date)
         {
             Console.WriteLine("Menu for {0}:",date.DayOfWeek.ToString());
@@ -19,8 +24,7 @@ namespace Restaurant
                 if (item.CheckAvailableDay(date.DayOfWeek))
                 {
                     item.Print_Item_info();
-                }
-                
+                }                
             }
         }
 
@@ -45,12 +49,14 @@ namespace Restaurant
             _availableDays.Add(dayOfWeek);
         }
 
+        // print the inforamtion of the item
         public void Print_Item_info()
         {
             Console.WriteLine();
             Console.WriteLine("Name: {0}\nPrice: {1}\ndescription: {2}", _name, _price, _description);
         }
 
+        // check if the day of week include in the '_availableDays' attribute of the MenuItem
         public bool CheckAvailableDay(DayOfWeek day)
         {
             if (_availableDays.Contains(day))
